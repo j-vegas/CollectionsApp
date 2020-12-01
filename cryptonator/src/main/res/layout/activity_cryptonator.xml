@@ -25,14 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/btcUsd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btcUsd"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btcUsd" />
 
     <Button
         android:id="@+id/btcRub"
@@ -57,6 +56,69 @@
         app:layout_constraintBottom_toBottomOf="@+id/btcRub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btcRub"
-        app:layout_constraintTop_toBottomOf="@+id/result" />
+        app:layout_constraintTop_toBottomOf="@+id/btcUsd" />
+
+    <Button
+        android:id="@+id/xrpUsd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/xrp_usd"
+        app:layout_constraintRight_toLeftOf="@+id/resultXrpUsd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btcRub" />
+
+    <TextView
+        android:id="@+id/resultXrpUsd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/xrpUsd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/xrpUsd"
+        app:layout_constraintTop_toBottomOf="@+id/btcRub" />
+
+    <Button
+        android:id="@+id/xrpRub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/xrp_rub"
+        app:layout_constraintRight_toLeftOf="@+id/resultXrpRub"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/xrpUsd" />
+
+    <TextView
+        android:id="@+id/resultXrpRub"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/xrpRub"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/xrpRub"
+        app:layout_constraintTop_toBottomOf="@+id/xrpUsd" />
+
+    <Button
+        android:id="@+id/showAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_error"
+        android:text="@string/show_all"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/xrpRub" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

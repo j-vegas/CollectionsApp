@@ -11,4 +11,10 @@ interface CryptoServices {
 
     @GET("/api/ticker/btc-rub")
     fun btcRub(): Call<CryptoResult>
+
+    @GET("/api/ticker/xrp-usd")
+    fun xrpUsd(): Call<CryptoResult>
+
+    @GET("/api/ticker/xrp-rub")
+    fun xrpRub(): Call<CryptoResult>
 }
