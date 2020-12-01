@@ -1,8 +1,6 @@
 package com.jvegas.cryptonator
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,12 +12,12 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CryptonatorActivity : AppCompatActivity(), View.OnClickListener, Callback<CryptoResult> {
+class CryptonatorActivity : AppCompatActivity() {
 
     private lateinit var buttonBtcUsd: Button
     private lateinit var buttonBtcRub: Button
-    private lateinit var resultText: TextView
-    private lateinit var resultText2: TextView
+    private lateinit var resultTextUsd: TextView
+    private lateinit var resultTextRu: TextView
 
     private val baseUrl: String = "https://api.cryptonator.com"
 
@@ -35,33 +33,39 @@ class CryptonatorActivity : AppCompatActivity(), View.OnClickListener, Callback<
         setContentView(R.layout.activity_cryptonator)
 
         buttonBtcUsd = findViewById(R.id.btcUsd)
-        resultText = findViewById(R.id.result)
+        resultTextUsd = findViewById(R.id.result)
 
         buttonBtcRub = findViewById(R.id.btcRub)
-        resultText2 = findViewById(R.id.result2)
+        resultTextRu = findViewById(R.id.result2)
 
-        buttonBtcUsd.setOnClickListener(this)
-        buttonBtcRub.setOnClickListener(this)
+        buttonBtcUsd.setOnClickListener { loadPriceBtnUsd() }
+        buttonBtcRub.setOnClickListener { loadPriceBtnRub() }
     }
 
-    override fun onClick(v: View?) {
-//        val call = services.btcUsd("BTC", "USD")
-        val call = services.btcUsd()
-        call.enqueue(this)
+    private fun loadPriceBtnRub() {
+        services.btcRub().enqueue(object : Callback<CryptoResult> {
+            override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
+                val result = response.body()
+                resultTextRu.text = result!!.ticker.price
+            }
 
-        val call2 = services.btcRub()
-        call2.enqueue(this)
+            override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
-    override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
-        val result = response.body()
-        resultText.text = result!!.ticker.price
+    private fun loadPriceBtnUsd() {
+        services.btcUsd().enqueue(object : Callback<CryptoResult> {
+            override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
+                val result = response.body()
+                resultTextUsd.text = result!!.ticker.price
+            }
 
-        val result2 = response.body()
-        resultText2.text = result2!!.ticker.price
+            override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
-    override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
-        Log.d("btcUsd", "FAIL")
-    }
 }
