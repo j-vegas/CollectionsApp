@@ -1,5 +1,7 @@
+include ':cryptonator'
 rootProject.name = "CollectionsApp"
 include ':app'
 include ':chuck'
 include ':books'
 include ':translate'
+include ':movie'

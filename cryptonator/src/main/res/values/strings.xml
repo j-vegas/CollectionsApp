@@ -1,0 +1,7 @@
+<resources>
+    <string name="btc_usd">btc-usd</string>
+    <string name="btc_rub">btc-rub</string>
+    <string name="xrp_usd">XRP-USD</string>
+    <string name="xrp_rub">XRP-RUB</string>
+    <string name="show_all">SHOW ALL PRICE</string>
+</resources>
