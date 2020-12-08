@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Jorge Vegas - Collections App</string>
+    <string name="app_name">Collections App by JV</string>
     <string name="chuck_jokes">Chuck Jokes</string>
     <string name="books_lib" translatable="false">Books Libruary</string>
-    <string name="translate">Translate</string>
+    <string name="translate">Translate API</string>
     <string name="cryptonator">Cryptocurrencies Exchange Rates</string>
+    <string name="movie">The Movie Database API</string>
 </resources>

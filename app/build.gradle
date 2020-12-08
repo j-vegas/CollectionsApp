@@ -43,6 +43,7 @@ dependencies {
     implementation project(path: ':books')
     implementation project(path: ':translate')
     implementation project(path: ':cryptonator')
+    implementation project(path: ':movie')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

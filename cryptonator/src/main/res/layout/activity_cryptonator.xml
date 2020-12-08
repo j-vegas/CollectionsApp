@@ -15,12 +15,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/btc_usd"
-        app:layout_constraintRight_toLeftOf="@+id/result"
+        app:layout_constraintRight_toLeftOf="@+id/resultBtcUsd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/result"
+        android:id="@+id/resultBtcUsd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,12 +40,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="@string/btc_rub"
-        app:layout_constraintRight_toLeftOf="@+id/result2"
+        app:layout_constraintRight_toLeftOf="@+id/resultBtcRub"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btcUsd" />
 
     <TextView
-        android:id="@+id/result2"
+        android:id="@+id/resultBtcRub"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -114,11 +114,25 @@
         android:id="@+id/showAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8sp"
         android:background="@color/design_default_color_error"
         android:text="@string/show_all"
         android:textColor="@color/cardview_light_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/xrpRub" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/changeList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showAll" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

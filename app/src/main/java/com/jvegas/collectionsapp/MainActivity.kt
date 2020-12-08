@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jvegas.books.BookActivity
 import com.jvegas.chuck.ChuckActivity
 import com.jvegas.cryptonator.CryptonatorActivity
+import com.jvegas.movie.MovieActivity
 import com.jvegas.translate.TranslateActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var booksApp: Button
     private lateinit var translateApp: Button
     private lateinit var cryptonatorApp: Button
+    private lateinit var movieApp: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,5 +46,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        movieApp = findViewById(R.id.movieApp)
+        movieApp.setOnClickListener { view ->
+            val intent = Intent(this, MovieActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
