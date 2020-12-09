@@ -2,7 +2,11 @@ package com.jvegas.movie
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.jvegas.movie.adapter.ResultAdapter
 import com.jvegas.movie.models.MovieApiResponse
+import com.jvegas.movie.models.ResultsItem
 import com.jvegas.movie.services.MovieApiServices
 import com.jvegas.movie.services.RetrofitInstance
 import retrofit2.Call
@@ -10,6 +14,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MovieActivity : AppCompatActivity() {
+
+    private lateinit var results: ArrayList<ResultsItem>
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ResultAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie)
@@ -29,11 +38,30 @@ class MovieActivity : AppCompatActivity() {
             ) {
                 val movieApiResponse: MovieApiResponse? =
                     response.body()
+                if (movieApiResponse?.results != null) {
+                    results = movieApiResponse.results as ArrayList<ResultsItem>
+                    fillRecyclerView()
+                }
             }
 
             override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
         })
+    }
+
+    private fun fillRecyclerView() {
+        recyclerView = findViewById(R.id.recyclerView)
+        adapter = ResultAdapter(results)
+
+//                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                }
+
+        val layout = GridLayoutManager(this@MovieActivity, 2)
+        recyclerView.layoutManager = layout
+
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
+
     }
 }
