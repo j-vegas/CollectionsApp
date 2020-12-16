@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jvegas.movie.adapter.ResultAdapter
 import com.jvegas.movie.models.MovieApiResponse
 import com.jvegas.movie.models.ResultsItem
@@ -18,12 +19,21 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var results: ArrayList<ResultsItem>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ResultAdapter
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie)
 
         getPopularMovies()
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh)
+        swipeRefreshLayout.setColorSchemeResources(R.color.design_default_color_primary)
+        swipeRefreshLayout.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                getPopularMovies()
+            }
+        })
     }
 
     private fun getPopularMovies() {
@@ -41,6 +51,7 @@ class MovieActivity : AppCompatActivity() {
                 if (movieApiResponse?.results != null) {
                     results = movieApiResponse.results as ArrayList<ResultsItem>
                     fillRecyclerView()
+                    swipeRefreshLayout.isRefreshing = false
                 }
             }
 

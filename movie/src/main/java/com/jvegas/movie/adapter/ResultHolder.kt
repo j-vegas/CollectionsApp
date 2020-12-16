@@ -17,9 +17,19 @@ class ResultHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(result: ResultsItem) {
         imagePath = "https://image.tmdb.org/t/p/w500/" + result.posterPath
         Glide.with(itemView)
-            .load(imagePath).into(movieImageView)
+            .load(imagePath)
+            .placeholder(R.drawable.progress_circle)
+            .into(movieImageView)
 
-        titleTextView.text = result.originalTitle
+        titleTextView.text = result.title
         popularityTextView.text = result.popularity.toString()
+
+//        itemView.setOnClickListener { view ->
+//            if (adapterPosition != RecyclerView.NO_POSITION) {
+//                val intent = Intent(view.context, MovieDetailsActivity::class.java)
+//                intent.putExtra("movieData", adapterPosition)
+//                view.context.startActivity(intent)
+//            }
+//        }
     }
 }
