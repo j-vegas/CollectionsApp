@@ -6,23 +6,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jvegas.books.adapters.BooksAdapter
+import com.jvegas.books.helpers.SwipeHelper
 import com.jvegas.books.models.Book
 import com.jvegas.books.models.BookViewModel
 
 class BookActivity : AppCompatActivity() {
 
     private lateinit var list: RecyclerView
-
-    //    private val books = mutableListOf<Book>()
-//    private lateinit var adapter: BooksAdapter
+    private lateinit var toast: Toast
     private lateinit var model: BookViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,22 +39,12 @@ class BookActivity : AppCompatActivity() {
             list.adapter = a
         })
 
-//        books.add(
-//            Book("name1", "author1", 23.00f, 4.9f)
-//        )
-//        books.add(
-//            Book("name2", "author2", 23.00f, 4.9f)
-//        )
-
-//        val adapter = BooksAdapter(books)
-//        adapter = BooksAdapter(books)
-
         val layout = LinearLayoutManager(this)
         val decoration = DividerItemDecoration(this, layout.orientation)
 
         list.layoutManager = layout
         list.addItemDecoration(decoration)
-//        list.adapter = adapter
+        setUpRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -97,12 +88,47 @@ class BookActivity : AppCompatActivity() {
                 rating.rating
             )
             model.addBook(book)
-//            books.add(0, book)
-//            adapter.notifyDataSetChanged()
-//            adapter.notifyItemChanged(0)
+
             dialog.dismiss()
         }
 
         builder.create().show()
+    }
+
+    private fun setUpRecyclerView() {
+
+        val itemTouchHelper = ItemTouchHelper(object : SwipeHelper(list) {
+            override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
+                var buttons = listOf<UnderlayButton>()
+                val deleteButton = deleteButton(position)
+                when (position) {
+                    position -> buttons = listOf(deleteButton)
+                }
+                return buttons
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(list)
+    }
+
+    private fun toast(text: String) {
+        toast?.cancel()
+        toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
+        toast?.show()
+    }
+
+    private fun deleteButton(position: Int): SwipeHelper.UnderlayButton {
+        return SwipeHelper.UnderlayButton(
+            this,
+            "Delete",
+            14.0f,
+            android.R.color.holo_red_light,
+            object : SwipeHelper.UnderlayButtonClickListener {
+                override fun onClick() {
+                    toast("Deleted item $position")
+                    // todo сделать удаление книги из list
+//                    model.deleteBook(book)
+                }
+            })
     }
 }

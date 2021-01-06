@@ -21,6 +21,12 @@ class BookViewModel : AndroidViewModel(BookApplication.instance) {
         }
     }
 
+    fun deleteBook(book: Book) {
+        service.submit {
+            dao.delete(book)
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         service.shutdown()
