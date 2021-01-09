@@ -7,13 +7,19 @@ import com.jvegas.cryptonator.R
 import com.jvegas.cryptonator.models.Change
 
 class ChangeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var date: TextView = itemView.findViewById(R.id.date)
-    var time: TextView = itemView.findViewById(R.id.time)
-    var changeBtcUsd: TextView = itemView.findViewById(R.id.changeBtcUsd)
+    val date: TextView = itemView.findViewById(R.id.date)
+    val time: TextView = itemView.findViewById(R.id.time)
+    val changeBtcUsd: TextView = itemView.findViewById(R.id.changeBtcUsd)
+    val changeBtcRub: TextView = itemView.findViewById(R.id.changeBtcRub)
+    val changeXrpUsd: TextView = itemView.findViewById(R.id.changeXrpUsd)
+    val changeXrpRub: TextView = itemView.findViewById(R.id.changeXrpRub)
 
     fun bind(change: Change) {
-        date.text = change.date.toString()
-        time.text = change.time.toString()
-        changeBtcUsd.text = change.changeBtcUsd.toString()
+        date.text = change.date
+        time.text = change.time
+        changeBtcUsd.text = change.changeBtcUsd
+        changeBtcRub.text = change.changeBtcRub
+        changeXrpUsd.text = change.changeXrpUsd
+        changeXrpRub.text = change.changeXrpRub
     }
 }

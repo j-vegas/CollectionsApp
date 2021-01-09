@@ -23,31 +23,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         chuckApp = findViewById(R.id.chuckApp)
-        chuckApp.setOnClickListener { view ->
+        chuckApp.setOnClickListener { _ ->
             val intent = Intent(this, ChuckActivity::class.java)
             startActivity(intent)
         }
 
         booksApp = findViewById(R.id.booksApp)
-        booksApp.setOnClickListener { view ->
+        booksApp.setOnClickListener { _ ->
             val intent = Intent(this, BookActivity::class.java)
             startActivity(intent)
         }
 
         translateApp = findViewById(R.id.translateApp)
-        translateApp.setOnClickListener { view ->
+        translateApp.setOnClickListener { _ ->
             val intent = Intent(this, TranslateActivity::class.java)
             startActivity(intent)
         }
 
         cryptonatorApp = findViewById(R.id.cryptonatorApp)
-        cryptonatorApp.setOnClickListener { view ->
+        cryptonatorApp.setOnClickListener { _ ->
             val intent = Intent(this, CryptonatorActivity::class.java)
             startActivity(intent)
         }
 
         movieApp = findViewById(R.id.movieApp)
-        movieApp.setOnClickListener { view ->
+        movieApp.setOnClickListener { _ ->
             val intent = Intent(this, MovieActivity::class.java)
             startActivity(intent)
         }

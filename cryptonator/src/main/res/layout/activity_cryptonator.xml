@@ -115,11 +115,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8sp"
-        android:background="@color/design_default_color_error"
         android:text="@string/show_all"
-        android:textColor="@color/cardview_light_background"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/addInHistory"
+        app:layout_constraintTop_toBottomOf="@+id/xrpRub" />
+
+    <Button
+        android:id="@+id/addInHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8sp"
+        android:text="@string/add_in_history"
+        app:layout_constraintBottom_toBottomOf="@+id/showAll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/showAll"
         app:layout_constraintTop_toBottomOf="@+id/xrpRub" />
 
     <androidx.recyclerview.widget.RecyclerView
