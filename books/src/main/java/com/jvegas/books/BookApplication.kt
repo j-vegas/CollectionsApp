@@ -2,7 +2,7 @@ package com.jvegas.books
 
 import android.app.Application
 
-class BookApplication : Application() {
+open class BookApplication : Application() {
 
     companion object {
         lateinit var instance: BookApplication

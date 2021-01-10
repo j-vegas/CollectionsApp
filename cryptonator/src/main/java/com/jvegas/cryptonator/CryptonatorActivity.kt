@@ -24,8 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CryptonatorActivity : AppCompatActivity() {
 
     private lateinit var changeList: RecyclerView
-
-    //    private var changess = mutableListOf<Change>()
     private lateinit var model: ChangeViewModel
 
     private lateinit var buttonBtcUsd: Button
@@ -75,8 +73,6 @@ class CryptonatorActivity : AppCompatActivity() {
 
         changeBtcUsd = findViewById(R.id.changeBtcUsd)
 
-//        val adapter = ChangeAdapter(changess)
-
         model = ViewModelProvider(this).get(ChangeViewModel::class.java)
 
         model.getAll().observe(this, Observer<List<Change>> {
@@ -90,8 +86,6 @@ class CryptonatorActivity : AppCompatActivity() {
         changeList.layoutManager = layout
         changeList.addItemDecoration(decoration)
 
-//        changeList.adapter = adapter
-
         buttonBtcUsd.setOnClickListener { loadPriceBtnUsd() }
         buttonBtcRub.setOnClickListener { loadPriceBtnRub() }
         buttonXrpUsd.setOnClickListener { loadPriceXrpUsd() }
@@ -102,12 +96,11 @@ class CryptonatorActivity : AppCompatActivity() {
                 TimeUtils.getCurrentDate(),
                 TimeUtils.getCurrentTime(),
                 resultTextUsd.text.toString(),
-                resultTextRu.text.toString(),
+                resultTextRu.text.toString(), //replace(Regex("\\d+(\\.\\d{0,2})?"),"")
                 resultTextXrpUsd.text.toString(),
                 resultTextXrpRub.text.toString()
             )
             model.addChangePrice(change)
-//            adapter.notifyDataSetChanged()
         }
     }
 
