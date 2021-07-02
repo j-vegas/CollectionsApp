@@ -14,6 +14,7 @@ import com.jvegas.cryptonator.data.CryptoResult
 import com.jvegas.cryptonator.models.Change
 import com.jvegas.cryptonator.models.ChangeViewModel
 import com.jvegas.cryptonator.services.CryptoServices
+import com.jvegas.cryptonator.utils.DecimalHelper.Companion.roundOffDecimal
 import com.jvegas.cryptonator.utils.TimeUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -96,7 +97,7 @@ class CryptonatorActivity : AppCompatActivity() {
                 TimeUtils.getCurrentDate(),
                 TimeUtils.getCurrentTime(),
                 resultTextUsd.text.toString(),
-                resultTextRu.text.toString(), //replace(Regex("\\d+(\\.\\d{0,2})?"),"")
+                resultTextRu.text.toString(),
                 resultTextXrpUsd.text.toString(),
                 resultTextXrpRub.text.toString()
             )
@@ -115,7 +116,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.btcRub().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextRu.text = result!!.ticker.price
+                resultTextRu.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
@@ -128,7 +129,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.btcUsd().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextUsd.text = result!!.ticker.price
+                resultTextUsd.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
@@ -141,7 +142,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.xrpRub().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextXrpRub.text = result!!.ticker.price
+                resultTextXrpRub.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
@@ -154,7 +155,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.xrpUsd().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextXrpUsd.text = result!!.ticker.price
+                resultTextXrpUsd.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {

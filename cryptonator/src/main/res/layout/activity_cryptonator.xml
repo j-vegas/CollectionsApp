@@ -33,6 +33,14 @@
         app:layout_constraintStart_toEndOf="@+id/btcUsd"
         app:layout_constraintTop_toTopOf="@+id/btcUsd" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cardview_dark_background"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/resultBtcUsd"
+        />
+
     <Button
         android:id="@+id/btcRub"
         android:layout_width="wrap_content"
@@ -57,6 +65,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btcRub"
         app:layout_constraintTop_toBottomOf="@+id/btcUsd" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cardview_dark_background"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/resultBtcRub"
+        />
 
     <Button
         android:id="@+id/xrpUsd"
@@ -84,6 +100,14 @@
         app:layout_constraintStart_toEndOf="@+id/xrpUsd"
         app:layout_constraintTop_toBottomOf="@+id/btcRub" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cardview_dark_background"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/resultXrpUsd"
+        />
+
     <Button
         android:id="@+id/xrpRub"
         android:layout_width="wrap_content"
@@ -109,6 +133,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/xrpRub"
         app:layout_constraintTop_toBottomOf="@+id/xrpUsd" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cardview_dark_background"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/resultXrpRub"
+        />
 
     <Button
         android:id="@+id/showAll"
