@@ -1,8 +1,8 @@
 package com.jvegas.cryptonator
 
-import android.app.Application
+import com.jvegas.books.BookApplication
 
-class ChangeApplication : Application() {
+class ChangeApplication : BookApplication() {
 
     companion object {
         lateinit var instance: ChangeApplication

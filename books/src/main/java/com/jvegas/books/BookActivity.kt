@@ -112,9 +112,9 @@ class BookActivity : AppCompatActivity() {
     }
 
     private fun toast(text: String) {
-        toast?.cancel()
+        toast.cancel()
         toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
-        toast?.show()
+        toast.show()
     }
 
     private fun deleteButton(position: Int): SwipeHelper.UnderlayButton {

@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jvegas.cryptonator.adapters.ChangeAdapter
 import com.jvegas.cryptonator.data.CryptoResult
 import com.jvegas.cryptonator.models.Change
+import com.jvegas.cryptonator.models.ChangeViewModel
 import com.jvegas.cryptonator.services.CryptoServices
+import com.jvegas.cryptonator.utils.DecimalHelper.Companion.roundOffDecimal
 import com.jvegas.cryptonator.utils.TimeUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,20 +25,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CryptonatorActivity : AppCompatActivity() {
 
     private lateinit var changeList: RecyclerView
-    private var changess = mutableListOf<Change>()
+    private lateinit var model: ChangeViewModel
 
     private lateinit var buttonBtcUsd: Button
     private lateinit var buttonBtcRub: Button
     private lateinit var buttonXrpUsd: Button
     private lateinit var buttonXrpRub: Button
     private lateinit var buttonAll: Button
+    private lateinit var addInHistoryBtn: Button
 
     private lateinit var resultTextUsd: TextView
     private lateinit var resultTextRu: TextView
     private lateinit var resultTextXrpUsd: TextView
     private lateinit var resultTextXrpRub: TextView
 
-    private lateinit var changeBtcUsd: TextView
+    var changeBtcUsd: TextView? = null
 
     private val baseUrl: String = "https://api.cryptonator.com"
 
@@ -63,19 +68,18 @@ class CryptonatorActivity : AppCompatActivity() {
 
         buttonAll = findViewById(R.id.showAll)
 
+        addInHistoryBtn = findViewById(R.id.addInHistory)
+
         changeList = findViewById(R.id.changeList)
 
-//        changeBtcUsd = findViewById(R.id.changeBtcUsd)
+        changeBtcUsd = findViewById(R.id.changeBtcUsd)
 
-        changess.add(
-            Change(
-                TimeUtils.getCurrentDate(),
-                TimeUtils.getCurrentTime(),
-                loadChangeBtcUsd().toString()
-            )
-        )
+        model = ViewModelProvider(this).get(ChangeViewModel::class.java)
 
-        val adapter = ChangeAdapter(changess)
+        model.getAll().observe(this, Observer<List<Change>> {
+            val adapter = ChangeAdapter(it)
+            changeList.adapter = adapter
+        })
 
         val layout = LinearLayoutManager(this)
         val decoration = DividerItemDecoration(this, layout.orientation)
@@ -83,29 +87,22 @@ class CryptonatorActivity : AppCompatActivity() {
         changeList.layoutManager = layout
         changeList.addItemDecoration(decoration)
 
-        changeList.adapter = adapter
-
         buttonBtcUsd.setOnClickListener { loadPriceBtnUsd() }
         buttonBtcRub.setOnClickListener { loadPriceBtnRub() }
         buttonXrpUsd.setOnClickListener { loadPriceXrpUsd() }
         buttonXrpRub.setOnClickListener { loadPriceXrpRub() }
         buttonAll.setOnClickListener { loadPriceAll() }
-    }
-
-    private fun loadChangeBtcUsd() {
-        services.btcUsd().enqueue(object : Callback<CryptoResult> {
-            override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
-                val result = response.body()
-//                resultTextRu.text = result!!.ticker.price
-                val res = result!!.ticker.price
-
-//                changeBtcUsd.text = res
-            }
-
-            override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+        addInHistoryBtn.setOnClickListener { _ ->
+            val change = Change(
+                TimeUtils.getCurrentDate(),
+                TimeUtils.getCurrentTime(),
+                resultTextUsd.text.toString(),
+                resultTextRu.text.toString(),
+                resultTextXrpUsd.text.toString(),
+                resultTextXrpRub.text.toString()
+            )
+            model.addChangePrice(change)
+        }
     }
 
     private fun loadPriceAll() {
@@ -119,7 +116,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.btcRub().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextRu.text = result!!.ticker.price
+                resultTextRu.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
@@ -132,7 +129,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.btcUsd().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextUsd.text = result!!.ticker.price
+                resultTextUsd.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
@@ -145,7 +142,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.xrpRub().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextXrpRub.text = result!!.ticker.price
+                resultTextXrpRub.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {
@@ -158,7 +155,7 @@ class CryptonatorActivity : AppCompatActivity() {
         services.xrpUsd().enqueue(object : Callback<CryptoResult> {
             override fun onResponse(call: Call<CryptoResult>, response: Response<CryptoResult>) {
                 val result = response.body()
-                resultTextXrpUsd.text = result!!.ticker.price
+                resultTextXrpUsd.text = roundOffDecimal(result!!.ticker.price.toDouble())
             }
 
             override fun onFailure(call: Call<CryptoResult>, t: Throwable) {

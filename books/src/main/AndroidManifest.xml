@@ -3,7 +3,6 @@
     package="com.jvegas.books">
 
     <application
-        android:name=".BookApplication"
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity android:name=".BookActivity" />
