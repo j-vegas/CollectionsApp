@@ -7,10 +7,10 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.RatingBar
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,15 +24,13 @@ class BookActivity : AppCompatActivity() {
 
     private lateinit var list: RecyclerView
     private lateinit var toast: Toast
-    private lateinit var model: BookViewModel
+    private val model: BookViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
 
         list = findViewById(R.id.list)
-
-        model = ViewModelProvider(this).get(BookViewModel::class.java)
 
         model.getAll().observe(this, Observer<List<Book>> {
             val a = BooksAdapter(it)

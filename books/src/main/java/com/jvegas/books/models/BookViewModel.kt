@@ -1,13 +1,13 @@
 package com.jvegas.books.models
 
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.jvegas.books.BookApplication
 import com.jvegas.books.data.BookDatabase
 import java.util.concurrent.Executors
 
-class BookViewModel : AndroidViewModel(BookApplication.instance) {
-    private val db = BookDatabase.getInstance(getApplication())
+class BookViewModel : ViewModel() {
+    private val db = BookDatabase.getInstance(BookApplication.instance)
     private val dao = db!!.bookDao()
     private val service = Executors.newFixedThreadPool(1)
 

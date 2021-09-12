@@ -1,13 +1,13 @@
 package com.jvegas.cryptonator.models
 
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.jvegas.cryptonator.ChangeApplication
 import com.jvegas.cryptonator.data.PriceHistoryDatabase
 import java.util.concurrent.Executors
 
-class ChangeViewModel : AndroidViewModel(ChangeApplication.instance) {
-    private val db = PriceHistoryDatabase.getInstance(getApplication())
+class ChangeViewModel : ViewModel() {
+    private val db = PriceHistoryDatabase.getInstance(ChangeApplication.instance)
     private val dao = db!!.changeDao()
     private val service = Executors.newFixedThreadPool(1)
 
