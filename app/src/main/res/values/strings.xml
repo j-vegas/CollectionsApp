@@ -5,4 +5,5 @@
     <string name="translate">Translate API</string>
     <string name="cryptonator">Cryptocurrencies Exchange Rates</string>
     <string name="movie">The Movie Database API</string>
+    <string name="shop_list">Shop List</string>
 </resources>

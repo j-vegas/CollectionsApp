@@ -23,6 +23,10 @@ class CryptonatorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCryptonatorBinding
     private val model: ChangeViewModel by viewModels()
 
+    init {
+        loadPriceAll()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCryptonatorBinding.inflate(layoutInflater)

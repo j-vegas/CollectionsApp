@@ -9,6 +9,7 @@ import com.jvegas.collectionsapp.databinding.ActivityMainBinding
 import com.jvegas.cryptonator.CryptonatorActivity
 import com.jvegas.movie.MovieActivity
 import com.jvegas.translate.TranslateActivity
+import ru.vegas.shoplist.representation.ShopListActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +43,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.movieApp.setOnClickListener { _ ->
             val intent = Intent(this, MovieActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.shoplistApp.setOnClickListener { _ ->
+            val intent = Intent(this, ShopListActivity::class.java)
             startActivity(intent)
         }
     }
