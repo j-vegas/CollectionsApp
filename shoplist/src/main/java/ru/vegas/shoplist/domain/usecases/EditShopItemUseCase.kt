@@ -6,6 +6,6 @@ import ru.vegas.shoplist.domain.ShopListRepository
 class EditShopItemUseCase(private val shopListRepository: ShopListRepository) {
 
     fun editShopItem(shopItemId: ShopItem) {
-        shopListRepository.deleteShopItem(shopItemId)
+        shopListRepository.editShopItem(shopItemId)
     }
 }
